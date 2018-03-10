@@ -1018,7 +1018,7 @@ $hxClasses["ApplicationMain"] = ApplicationMain;
 ApplicationMain.__name__ = ["ApplicationMain"];
 ApplicationMain.main = function() {
 	var projectName = "LeadMe";
-	var config = { build : "12", company : "Company Name", file : "LeadMe", fps : 60, name : "LeadMe", orientation : "", packageName : "com.sample.leadme", version : "1.0.0", windows : [{ allowHighDPI : false, alwaysOnTop : false, antialiasing : 0, background : 16777215, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 0, hidden : null, maximized : null, minimized : null, parameters : { }, resizable : true, stencilBuffer : true, title : "LeadMe", vsync : false, width : 0, x : null, y : null}]};
+	var config = { build : "13", company : "Company Name", file : "LeadMe", fps : 60, name : "LeadMe", orientation : "", packageName : "com.sample.leadme", version : "1.0.0", windows : [{ allowHighDPI : false, alwaysOnTop : false, antialiasing : 0, background : 16777215, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 0, hidden : null, maximized : null, minimized : null, parameters : { }, resizable : true, stencilBuffer : true, title : "LeadMe", vsync : false, width : 0, x : null, y : null}]};
 	lime_system_System.__registerEntryPoint(projectName,ApplicationMain.create,config);
 };
 ApplicationMain.create = function(config) {
@@ -3500,6 +3500,7 @@ HxOverrides.iter = function(a) {
 	}};
 };
 var InGame = function(player,field1) {
+	this.isMouseDown = false;
 	this.midDown = false;
 	this.sceneName = "set";
 	this.objects = new haxe_ds_IntMap();
@@ -3572,6 +3573,7 @@ var InGame = function(player,field1) {
 	player.container.addEventListener("click",$bind(this,this.startButton));
 	field1.container.parent.addEventListener("mouseDown",$bind(this,this.startCamera));
 	field1.container.parent.addEventListener("mouseUp",$bind(this,this.stopCamera));
+	field1.container.parent.addEventListener("mouseMove",$bind(this,this.moveCamera));
 	this.high.addChild(this.start.container);
 };
 $hxClasses["InGame"] = InGame;
@@ -3593,19 +3595,23 @@ InGame.prototype = {
 	,objects: null
 	,sceneName: null
 	,midDown: null
+	,isMouseDown: null
 	,startCamera: function(e) {
 		this.pos.x = this.container.get_mouseX();
 		this.pos.y = this.container.get_mouseY();
-		this.field.container.parent.addEventListener("mouseMove",$bind(this,this.moveCamera));
+		this.isMouseDown = true;
 		haxe_Log.trace("DONW",{ fileName : "InGame.hx", lineNumber : 97, className : "InGame", methodName : "startCamera"});
 	}
 	,moveCamera: function(e) {
+		if(!this.isMouseDown) {
+			return;
+		}
 		var _g = this.sprite;
 		_g.set_x(_g.get_x() + (this.pos.x - this.container.get_mouseX()));
 		var _g1 = this.sprite;
 		_g1.set_y(_g1.get_y() + (this.pos.y - this.container.get_mouseY()));
-		haxe_Log.trace("x:" + this.sprite.get_x(),{ fileName : "InGame.hx", lineNumber : 102, className : "InGame", methodName : "moveCamera"});
-		haxe_Log.trace("y:" + this.sprite.get_y(),{ fileName : "InGame.hx", lineNumber : 103, className : "InGame", methodName : "moveCamera"});
+		haxe_Log.trace("x:" + this.sprite.get_x(),{ fileName : "InGame.hx", lineNumber : 103, className : "InGame", methodName : "moveCamera"});
+		haxe_Log.trace("y:" + this.sprite.get_y(),{ fileName : "InGame.hx", lineNumber : 104, className : "InGame", methodName : "moveCamera"});
 	}
 	,stopCamera: function(e) {
 		if(this.sprite.get_x() > 176) {
@@ -3620,8 +3626,8 @@ InGame.prototype = {
 		if(this.sprite.get_y() < -150) {
 			this.sprite.set_y(-250);
 		}
-		this.field.container.parent.removeEventListener("mouseMove",$bind(this,this.moveCamera));
-		haxe_Log.trace("UP",{ fileName : "InGame.hx", lineNumber : 111, className : "InGame", methodName : "stopCamera"});
+		this.isMouseDown = false;
+		haxe_Log.trace("UP",{ fileName : "InGame.hx", lineNumber : 112, className : "InGame", methodName : "stopCamera"});
 	}
 	,update: function() {
 		var _g = this.sceneName;
@@ -3806,7 +3812,7 @@ InGame.prototype = {
 			object_.actionToPlayer(this.player);
 			break;
 		case 3:
-			haxe_Log.trace(":" + this.player.frame,{ fileName : "InGame.hx", lineNumber : 278, className : "InGame", methodName : "callEvent"});
+			haxe_Log.trace(":" + this.player.frame,{ fileName : "InGame.hx", lineNumber : 279, className : "InGame", methodName : "callEvent"});
 			this.player.frame = 0;
 			this.camera.setContainer(object_.container);
 			this.field.container.parent.addChild(Draw.setupScreenEffect());
@@ -3874,7 +3880,7 @@ InGame.prototype = {
 		}
 	}
 	,clear: function() {
-		haxe_Log.trace("a:" + this.player.frame,{ fileName : "InGame.hx", lineNumber : 343, className : "InGame", methodName : "clear"});
+		haxe_Log.trace("a:" + this.player.frame,{ fileName : "InGame.hx", lineNumber : 344, className : "InGame", methodName : "clear"});
 		if(this.player.frame >= 180) {
 			Draw.removeScreenEffect();
 			this.isClear = true;
@@ -31983,7 +31989,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 137184;
+	this.version = 738769;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = ["lime","utils","AssetCache"];
