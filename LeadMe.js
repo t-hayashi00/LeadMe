@@ -1018,7 +1018,7 @@ $hxClasses["ApplicationMain"] = ApplicationMain;
 ApplicationMain.__name__ = ["ApplicationMain"];
 ApplicationMain.main = function() {
 	var projectName = "LeadMe";
-	var config = { build : "11", company : "Company Name", file : "LeadMe", fps : 60, name : "LeadMe", orientation : "", packageName : "com.sample.leadme", version : "1.0.0", windows : [{ allowHighDPI : false, alwaysOnTop : false, antialiasing : 0, background : 16777215, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 0, hidden : null, maximized : null, minimized : null, parameters : { }, resizable : true, stencilBuffer : true, title : "LeadMe", vsync : false, width : 0, x : null, y : null}]};
+	var config = { build : "12", company : "Company Name", file : "LeadMe", fps : 60, name : "LeadMe", orientation : "", packageName : "com.sample.leadme", version : "1.0.0", windows : [{ allowHighDPI : false, alwaysOnTop : false, antialiasing : 0, background : 16777215, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 0, hidden : null, maximized : null, minimized : null, parameters : { }, resizable : true, stencilBuffer : true, title : "LeadMe", vsync : false, width : 0, x : null, y : null}]};
 	lime_system_System.__registerEntryPoint(projectName,ApplicationMain.create,config);
 };
 ApplicationMain.create = function(config) {
@@ -3677,9 +3677,9 @@ InGame.prototype = {
 		this.player.draw();
 	}
 	,startButton: function(e) {
-		this.field.container.parent.removeEventListener("rightMouseDown",$bind(this,this.startCamera));
+		this.field.container.parent.removeEventListener("mouseDown",$bind(this,this.startCamera));
 		this.field.container.parent.removeEventListener("mouseMove",$bind(this,this.moveCamera));
-		this.field.container.parent.removeEventListener("rightMouseUp",$bind(this,this.stopCamera));
+		this.field.container.parent.removeEventListener("mouseUp",$bind(this,this.stopCamera));
 		this.camera.setContainer(this.player.container);
 		this.high.removeChild(this.start.container);
 		var obejectIt = this.objects.iterator();
@@ -31983,7 +31983,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 876845;
+	this.version = 137184;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = ["lime","utils","AssetCache"];
