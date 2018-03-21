@@ -37,7 +37,6 @@ class Game {
 	var stageNum:Int = 1;
 	var test:Int = 0;
 
-	// MainでこいつにMainのスプライトを突っ込んでやることでメインループが成立する
 	public function new (UI:Sprite) {
 		this.UI = UI;
 		UI.addChild(game);
