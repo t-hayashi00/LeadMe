@@ -1,6 +1,6 @@
 # LeadMe!
 ## 概要
-クリックでオブジェクトを操作し、キャラクターをゴールまで導くアクションゲームです。  
+クリックでオブジェクトを操作し、キャラクターをゴールまで導くパズルゲームです。  
 開発環境：Haxe,OpenFL  
 制作期間：2カ月  
 ![スクリーンショット](https://raw.githubusercontent.com/t-hayashi00/LeadMe/master/image.png )
